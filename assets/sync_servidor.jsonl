@@ -1,0 +1,17 @@
+{
+  "ciclo_id": "ciclo-CAM-001-20250627150000",
+  "data_inicio": "2025-06-27T15:00:00",
+  "data_fim": "2025-06-27T15:00:50",
+  "etapas": [
+    { "etapa": "EM_FILA_CARREGAMENTO", "timestamp": "2025-06-27T15:00:05" },
+    { "etapa": "EM_CARREGAMENTO", "timestamp": "2025-06-27T15:00:15" },
+    { "etapa": "TRANSITO_CHEIO", "timestamp": "2025-06-27T15:00:20" },
+    { "etapa": "EM_FILA_BASCULAMENTO", "timestamp": "2025-06-27T15:00:35" },
+    { "etapa": "EM_BASCULAMENTO", "timestamp": "2025-06-27T15:00:40" },
+    { "etapa": "TRANSITO_VAZIO", "timestamp": "2025-06-27T15:00:50" }
+  ],
+  "equipamento_id": "CAM-001",
+  "equipamento_carga": "EXCAV-001",
+  "ponto_basculamento": { "x": 100, "y": 200, "z": 0 },
+  "status_sincronizacao": "SINCRONIZADO"
+}
