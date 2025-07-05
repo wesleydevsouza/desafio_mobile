@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 2.0.0+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.3.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -29,16 +29,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_launcher_icons: 
+  flutter_launcher_icons: ^0.13.1
   google_fonts: ^5.0.0
   shared_preferences: ^2.0.15
   provider: ^6.0.3
   permission_handler: ^11.1.0
 
-flutter_icons:
-  android: "launcher_icon"
-  adaptive_icon_background: "#FFFFFF"
+dependency_overrides:
+  archive: ^3.4.2
 
+flutter_icons:
+  adaptive_icon_background: "#FFFFFF"
+  android: true
+  ios: true
+  image_path: "assets/app_icon.png"
+  remove_alpha_ios: true
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,7 +53,7 @@ flutter_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

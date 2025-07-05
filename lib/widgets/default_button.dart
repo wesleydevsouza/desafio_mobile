@@ -22,7 +22,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        constraints: BoxConstraints(minWidth: SizeConfig.widthMultiplier * 85),
+        constraints: BoxConstraints(minWidth: SizeConfig.widthMultiplier * 40),
         decoration: BoxDecoration(
           boxShadow: boxShadow != null ? [boxShadow!] : null,
           gradient: AppTheme.corBotao,
@@ -37,10 +37,7 @@ class DefaultButton extends StatelessWidget {
           padding: EdgeInsets.zero,
           child: Text(
             textButton!,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge
-                ?.copyWith(color: Colors.blue.shade900),
+            style: AppTheme.textoGeral,
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:desafio_mobile/constants/size_config.dart';
+import 'package:desafio_mobile/constants/styling.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/simulacao_viewmodel.dart';
@@ -19,23 +20,36 @@ class _SimulacaoViewState extends State<SimulacaoView> {
     final ciclo = viewModel.cicloAtual;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Simulador'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.upload_file),
-            onPressed: () => viewModel.exportarCiclos(),
-          )
-        ],
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Simulador'),
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.upload_file),
+      //       onPressed: () => viewModel.exportarCiclos(),
+      //     )
+      //   ],
+      // ),
       body: SafeArea(
         child: SizedBox(
           height: SizeConfig.heightMultiplier * 85,
           child: SingleChildScrollView(
             child: leitura == null
-                ? const Text("Clique em SIMULAR para começar")
+                ? const Text(
+                    "Clique em SIMULAR para começar",
+                    style: AppTheme.titulo,
+                  )
                 : Column(
                     children: [
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(24, 24, 0, 24),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Simulação de Leitura',
+                            style: AppTheme.titulo,
+                          ),
+                        ),
+                      ),
                       SimulacaoCard(
                         etapaAtual: viewModel.etapaAtual,
                         velocidade:

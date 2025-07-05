@@ -26,7 +26,7 @@ class TopBar extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     AppTheme.corRealce.withOpacity(0.3),
-                    AppTheme.corTexto.withOpacity(0.1),
+                    AppTheme.corFonte.withOpacity(0.1),
                   ],
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
@@ -59,7 +59,7 @@ class TopBar extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     AppTheme.corRealce.withOpacity(0.3),
-                    AppTheme.corTexto.withOpacity(0.1),
+                    AppTheme.corFonte.withOpacity(0.1),
                   ],
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
