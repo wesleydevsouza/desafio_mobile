@@ -33,7 +33,18 @@ class SimulacaoCard extends StatelessWidget {
 
   String _formatDateTime(DateTime? dt) {
     if (dt == null) return '-';
-    return "${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year} - ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}";
+    return "${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year} - "
+        "${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}:${dt.second.toString().padLeft(2, '0')}";
+  }
+
+  String _formatTimestamp(String? iso) {
+    if (iso == null) return '-';
+    try {
+      final dt = DateTime.parse(iso);
+      return _formatDateTime(dt);
+    } catch (_) {
+      return iso;
+    }
   }
 
   @override
@@ -164,11 +175,19 @@ class SimulacaoCard extends StatelessWidget {
                 const Icon(Icons.sync, size: 25, color: Colors.grey),
               ],
             ),
-            SizedBox(height: SizeConfig.heightMultiplier * 1),
+            SizedBox(height: SizeConfig.heightMultiplier * 2),
             ExpansionTile(
-              title: const Text(
+              initiallyExpanded: true,
+              iconColor: Colors.white,
+              tilePadding: EdgeInsets.zero,
+              title: Text(
                 'Etapas',
-                style: AppTheme.textoGeral,
+                style: AppTheme.textoGeral.copyWith(fontSize: 20),
+              ),
+              trailing: const Icon(
+                Icons.expand_more,
+                size: 24,
+                color: Colors.white,
               ),
               children: [
                 if (etapas != null && etapas!.isNotEmpty)
@@ -177,8 +196,10 @@ class SimulacaoCard extends StatelessWidget {
                           ListTile(
                             title: Text(etapa['etapa'] ?? '-',
                                 style: AppTheme.textoGeral),
-                            subtitle: Text(etapa['timestamp'] ?? '-',
-                                style: AppTheme.subTitulo),
+                            subtitle: Text(
+                              _formatTimestamp(etapa['timestamp']),
+                              style: AppTheme.subTitulo,
+                            ),
                           ),
                           if (etapas!.last != etapa)
                             const Divider(color: Colors.grey),
@@ -192,14 +213,6 @@ class SimulacaoCard extends StatelessWidget {
               ],
             ),
             SizedBox(height: SizeConfig.heightMultiplier * 2),
-            if (onPressed != null)
-              Align(
-                alignment: Alignment.centerRight,
-                child: DefaultButton(
-                  textButton: 'Simular',
-                  onPressed: onPressed,
-                ),
-              ),
           ],
         ),
       ),

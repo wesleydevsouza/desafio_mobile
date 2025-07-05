@@ -69,52 +69,54 @@ class SimulacaoViewModel extends ChangeNotifier {
 
     String chave = '';
     if (velocidade == 0 && distEscavadeira > 2) {
-      chave = 'FILA_CARREGAMENTO';
+      chave = 'Fila Carregamento';
     } else if (velocidade == 0 && distEscavadeira <= 2) {
-      chave = 'CARREGAMENTO';
-    } else if (velocidade > 0 && _etapaAtual == "EM_CARREGAMENTO") {
-      chave = 'TRANSITO_CHEIO';
+      chave = 'Em Carregamento';
+    } else if (velocidade > 0 && _etapaAtual == "Em Carregamento") {
+      chave = 'Transito Cheio';
     } else if (velocidade == 0 &&
         distBasculamento < 3 &&
         bascula.status == "DESATIVADO") {
-      chave = 'FILA_BASCULAMENTO';
+      chave = 'Fila Basculamento';
     } else if (velocidade == 0 &&
         distBasculamento < 3 &&
         bascula.status == "ATIVADO") {
-      chave = 'BASCULAMENTO';
+      chave = 'Em Basculamento';
     } else if (velocidade > 0 &&
-        _etapaAtual == "EM_BASCULAMENTO" &&
+        _etapaAtual == "Em Basculamento" &&
         distBasculamento > 5) {
-      chave = 'TRANSITO_VAZIO';
+      chave = 'Transito Vazio';
     }
 
     switch (chave) {
-      case 'FILA_CARREGAMENTO':
-        _etapaAtual = "EM_FILA_CARREGAMENTO";
+      case 'Fila Carregamento':
+        _etapaAtual = "Fila Carregamento";
         break;
-      case 'CARREGAMENTO':
-        _etapaAtual = "EM_CARREGAMENTO";
+      case 'Em Carregamento':
+        _etapaAtual = "Em Carregamento";
         break;
-      case 'TRANSITO_CHEIO':
-        _etapaAtual = "TRANSITO_CHEIO";
+      case 'Transito Cheio':
+        _etapaAtual = "Transito Cheio";
         break;
-      case 'FILA_BASCULAMENTO':
-        _etapaAtual = "EM_FILA_BASCULAMENTO";
+      case 'Fila Basculamento':
+        _etapaAtual = "Fila Basculamento";
         break;
-      case 'BASCULAMENTO':
-        _etapaAtual = "EM_BASCULAMENTO";
+      case 'Em Basculamento':
+        _etapaAtual = "Em Basculamento";
         break;
-      case 'TRANSITO_VAZIO':
-        _etapaAtual = "TRANSITO_VAZIO";
+      case 'Transito Vazio':
+        _etapaAtual = "Transito Vazio";
         break;
       default:
         break;
     }
 
-    if (_etapaAtual == "EM_FILA_CARREGAMENTO" && _cicloAtual == null) {
+    if (_etapaAtual == "Fila Carregamento" && _cicloAtual == null) {
+      final dt = leitura.dataHora;
+      final dataFormatada =
+          "${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}";
       _cicloAtual = CicloTransporte(
-        cicloId:
-            "ciclo-CAM-001-${leitura.dataHora.toIso8601String().replaceAll(':', '').replaceAll('-', '')}",
+        cicloId: "Ciclo CAM-001 $dataFormatada",
         dataInicio: leitura.dataHora,
         equipamentoId: "CAM-001",
         equipamentoCarga: leitura.equipamentoCarga,
@@ -126,7 +128,7 @@ class SimulacaoViewModel extends ChangeNotifier {
 
     _cicloAtual?.etapas.add({"etapa": _etapaAtual, "timestamp": timestamp});
 
-    if (_etapaAtual == "TRANSITO_VAZIO" && _cicloAtual != null) {
+    if (_etapaAtual == "Transito Vazio" && _cicloAtual != null) {
       _cicloAtual!.dataFim = leitura.dataHora;
       _ciclos.add(_cicloAtual!);
       _cicloAtual = null;

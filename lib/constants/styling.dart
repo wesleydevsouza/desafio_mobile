@@ -55,9 +55,9 @@ class AppTheme {
 
   static const TextStyle labelText = TextStyle(
     fontFamily: 'Frutiger',
-    color: corFonte,
-    fontWeight: FontWeight.bold,
-    fontSize: 32,
+    color: corFonte2,
+    fontWeight: FontWeight.normal,
+    fontSize: 16,
   );
 
   static const TextTheme lightTextTheme = TextTheme(
