@@ -1,5 +1,4 @@
 import 'package:desafio_mobile/constants/styling.dart';
-import 'package:desafio_mobile/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import '../../constants/size_config.dart';
 
@@ -49,6 +48,9 @@ class SimulacaoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isParado = velocidade.startsWith('0');
+    final corVelocidade = isParado ? Colors.orange : Colors.green;
+
     return Center(
       child: Container(
         width: SizeConfig.widthMultiplier * 90,
@@ -66,7 +68,6 @@ class SimulacaoCard extends StatelessWidget {
           ],
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -74,27 +75,18 @@ class SimulacaoCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: Icon(
-                        Icons.front_loader,
-                        size: 36,
-                        color: Colors.white,
-                      ),
-                    ),
+                    const Icon(Icons.front_loader,
+                        size: 36, color: Colors.white),
+                    const SizedBox(width: 8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          equipamentoCarga,
-                          style: AppTheme.textoGeral,
-                        ),
+                        Text(equipamentoCarga, style: AppTheme.textoGeral),
                         SizedBox(
                           width: SizeConfig.widthMultiplier * 50,
                           child: Text(
                             cicloId ?? '-',
                             maxLines: 3,
-                            softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             style: AppTheme.subTitulo,
                           ),
@@ -106,89 +98,58 @@ class SimulacaoCard extends StatelessWidget {
                 Text(
                   velocidade,
                   style: AppTheme.textoGeral.copyWith(
-                      color: Colors.green, fontWeight: FontWeight.w600),
+                    color: corVelocidade,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2),
-            const Text(
-              'Etapa Atual',
-              style: AppTheme.subTitulo,
-            ),
-            Text(
-              etapaAtual,
-              style: AppTheme.textoGeral,
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2),
-            const Text(
-              'Ponto de Basculamento',
-              style: AppTheme.subTitulo,
-            ),
-            Text(
-              pontoBasculamento,
-              style: AppTheme.textoGeral,
-            ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2),
-            const Text(
-              'Início do Ciclo',
-              style: AppTheme.subTitulo,
-            ),
+            const SizedBox(height: 16),
+            const Text('Etapa Atual', style: AppTheme.subTitulo),
+            Text(etapaAtual, style: AppTheme.textoGeral),
+            const SizedBox(height: 16),
+            const Text('Ponto de Basculamento', style: AppTheme.subTitulo),
+            Text(pontoBasculamento, style: AppTheme.textoGeral),
+            const SizedBox(height: 16),
+            const Text('Início do Ciclo', style: AppTheme.subTitulo),
             const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  _formatDateTime(dataInicio),
-                  style: AppTheme.textoGeral,
-                ),
+                Text(_formatDateTime(dataInicio), style: AppTheme.textoGeral),
                 const Icon(Icons.calendar_today, size: 20, color: Colors.grey),
               ],
             ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2),
-            const Text(
-              'Fim do Ciclo',
-              style: AppTheme.subTitulo,
-            ),
+            const SizedBox(height: 16),
+            const Text('Fim do Ciclo', style: AppTheme.subTitulo),
             const SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  _formatDateTime(dataFim),
-                  style: AppTheme.textoGeral,
-                ),
+                Text(_formatDateTime(dataFim), style: AppTheme.textoGeral),
                 const Icon(Icons.calendar_today, size: 20, color: Colors.grey),
               ],
             ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2),
-            const Text(
-              'Status da Sincronização',
-              style: AppTheme.subTitulo,
-            ),
+            const SizedBox(height: 16),
+            const Text('Status da Sincronização', style: AppTheme.subTitulo),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  statusSincronizacao ?? '-',
-                  style: AppTheme.textoGeral,
-                ),
+                Text(statusSincronizacao ?? '-', style: AppTheme.textoGeral),
                 const Icon(Icons.sync, size: 25, color: Colors.grey),
               ],
             ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2),
+            const SizedBox(height: 16),
             ExpansionTile(
-              initiallyExpanded: true,
               iconColor: Colors.white,
+              collapsedIconColor: Colors.white,
               tilePadding: EdgeInsets.zero,
               title: Text(
                 'Etapas',
                 style: AppTheme.textoGeral.copyWith(fontSize: 20),
               ),
-              trailing: const Icon(
-                Icons.expand_more,
-                size: 24,
-                color: Colors.white,
-              ),
+              trailing:
+                  const Icon(Icons.expand_more, size: 24, color: Colors.white),
               children: [
                 if (etapas != null && etapas!.isNotEmpty)
                   ...etapas!.map((etapa) => Column(
@@ -212,7 +173,6 @@ class SimulacaoCard extends StatelessWidget {
                   ),
               ],
             ),
-            SizedBox(height: SizeConfig.heightMultiplier * 2),
           ],
         ),
       ),

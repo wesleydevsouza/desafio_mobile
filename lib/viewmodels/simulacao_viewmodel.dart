@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:desafio_mobile/models/ciclo_transporte_model.dart';
-import 'package:desafio_mobile/models/leitura_sensor_model.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import '../models/leitura_sensor_model.dart';
+import '../models/ciclo_transporte_model.dart';
 import '../services/arquivo_service.dart';
 
 class SimulacaoViewModel extends ChangeNotifier {
@@ -10,6 +10,7 @@ class SimulacaoViewModel extends ChangeNotifier {
   final List<CicloTransporte> _ciclos = [];
   int _indiceAtual = -1;
   CicloTransporte? _cicloAtual;
+  CicloTransporte? _ultimoCicloFinalizado;
   final _arquivoService = ArquivoService();
 
   String get etapaAtual => _etapaAtual;
@@ -21,6 +22,7 @@ class SimulacaoViewModel extends ChangeNotifier {
           : null;
 
   CicloTransporte? get cicloAtual => _cicloAtual;
+  CicloTransporte? get ultimoCicloFinalizado => _ultimoCicloFinalizado;
 
   double get velocidadeKmH =>
       leituraAtual != null ? leituraAtual!.gps.velocidade * 3.6 : 0;
@@ -47,7 +49,6 @@ class SimulacaoViewModel extends ChangeNotifier {
     _indiceAtual++;
     final leitura = _leituras[_indiceAtual];
     _determinarEtapa(leitura);
-
     notifyListeners();
   }
 
@@ -107,8 +108,6 @@ class SimulacaoViewModel extends ChangeNotifier {
       case 'Transito Vazio':
         _etapaAtual = "Transito Vazio";
         break;
-      default:
-        break;
     }
 
     if (_etapaAtual == "Fila Carregamento" && _cicloAtual == null) {
@@ -131,6 +130,7 @@ class SimulacaoViewModel extends ChangeNotifier {
     if (_etapaAtual == "Transito Vazio" && _cicloAtual != null) {
       _cicloAtual!.dataFim = leitura.dataHora;
       _ciclos.add(_cicloAtual!);
+      _ultimoCicloFinalizado = _cicloAtual;
       _cicloAtual = null;
     }
   }

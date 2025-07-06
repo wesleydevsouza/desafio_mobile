@@ -38,18 +38,9 @@ class _SimulacaoViewState extends State<SimulacaoView> {
   Widget build(BuildContext context) {
     final viewModel = Provider.of<SimulacaoViewModel>(context);
     final leitura = viewModel.leituraAtual;
-    final ciclo = viewModel.cicloAtual;
+    final ciclo = viewModel.cicloAtual ?? viewModel.ultimoCicloFinalizado;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Simulador'),
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.upload_file),
-      //       onPressed: () => viewModel.exportarCiclos(),
-      //     )
-      //   ],
-      // ),
       body: SafeArea(
         child: SizedBox(
           height: SizeConfig.heightMultiplier * 85,
@@ -87,12 +78,10 @@ class _SimulacaoViewState extends State<SimulacaoView> {
                     dataInicio: ciclo?.dataInicio,
                     dataFim: ciclo?.dataFim,
                     statusSincronizacao: ciclo?.statusSincronizacao,
-                    etapas: ciclo?.etapas,
+                    etapas: ciclo?.etapas ?? const [],
                     onPressed: () => _onSimularPressed(viewModel),
                   ),
-                SizedBox(
-                  height: SizeConfig.heightMultiplier * 5,
-                ),
+                SizedBox(height: SizeConfig.heightMultiplier * 5),
               ],
             ),
           ),
