@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static LinearGradient corBotao = const LinearGradient(colors: [
-    Color(0xff903cfe),
-    Color(0xFF903cfe),
-  ], begin: Alignment.bottomLeft, end: Alignment.topRight);
-
   static const Color corFonte = Color(0xFFFFFAFA);
   static const Color corFonte2 = Colors.black;
   static const Color corFonte3 = Color(0xFF929292);
@@ -15,8 +10,7 @@ class AppTheme {
   static const Color corContainer = Color(0xFFF8FCF6);
   static const Color corBackground = Color(0xff1d1d1f);
   static const Color corCardBackground = Color(0xff2c2b30);
-
-  static const Color corRealce = Color(0xffAD49E1);
+  static const Color corBotao = Color(0xffeae0ff);
 
   static const TextStyle titulo = TextStyle(
     fontFamily: 'Frutiger',

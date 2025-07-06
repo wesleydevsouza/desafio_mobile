@@ -161,7 +161,9 @@ class SimulacaoViewModel extends ChangeNotifier {
     _cicloAtual?.etapas.add({"etapa": _etapaAtual, "timestamp": timestamp});
 
     if (_etapaAtual == "Transito Vazio" && _cicloAtual != null) {
-      _cicloAtual!.dataFim = leitura.dataHora;
+      _cicloAtual!
+        ..dataFim = leitura.dataHora
+        ..statusSincronizacao = "Pronto para Sincronizar";
       _ciclos.add(_cicloAtual!);
       _cicloAtual = null;
     }

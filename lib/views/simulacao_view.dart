@@ -1,9 +1,12 @@
 import 'package:desafio_mobile/constants/size_config.dart';
 import 'package:desafio_mobile/constants/styling.dart';
+import 'package:desafio_mobile/widgets/default_button.dart';
+import 'package:desafio_mobile/widgets/top_reload_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/simulacao_viewmodel.dart';
 import '../widgets/simulacao_card.dart';
+import '../helpers/simulacao_view_helpers.dart';
 
 class SimulacaoView extends StatefulWidget {
   const SimulacaoView({super.key});
@@ -12,26 +15,14 @@ class SimulacaoView extends StatefulWidget {
   State<SimulacaoView> createState() => _SimulacaoViewState();
 }
 
-class _SimulacaoViewState extends State<SimulacaoView> {
+class _SimulacaoViewState extends State<SimulacaoView>
+    with SimulacaoViewHelpers<SimulacaoView> {
   final ScrollController _scrollController = ScrollController();
 
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onSimularPressed(SimulacaoViewModel viewModel) {
-    viewModel.simularProximaLeitura();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeOut,
-        );
-      }
-    });
   }
 
   @override
@@ -52,9 +43,25 @@ class _SimulacaoViewState extends State<SimulacaoView> {
                   padding: EdgeInsets.fromLTRB(24, 24, 0, 24),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Simulação de Leitura',
-                      style: AppTheme.titulo,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Simulação de Ciclos Automatizado',
+                              style: AppTheme.titulo,
+                              maxLines: 1,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 16.0),
+                          child: TopReloadButton(),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -79,16 +86,22 @@ class _SimulacaoViewState extends State<SimulacaoView> {
                     dataFim: ciclo?.dataFim,
                     statusSincronizacao: ciclo?.statusSincronizacao,
                     etapas: ciclo?.etapas ?? const [],
-                    onPressed: () => _onSimularPressed(viewModel),
+                    onPressed: () =>
+                        onSimularPressed(viewModel, _scrollController),
                   ),
-                SizedBox(height: SizeConfig.heightMultiplier * 5),
+                SizedBox(height: SizeConfig.heightMultiplier * 3),
+                if (ciclo?.statusSincronizacao == "Pronto para Sincronizar")
+                  DefaultButton(
+                    textButton: "Exportar",
+                    onPressed: () => onExportarPressed(viewModel),
+                  ),
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _onSimularPressed(viewModel),
+        onPressed: () => onSimularPressed(viewModel, _scrollController),
         icon: const Icon(Icons.play_arrow),
         label: const Text("Simular", style: AppTheme.labelText),
       ),

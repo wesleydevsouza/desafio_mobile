@@ -136,7 +136,7 @@ class SimulacaoCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(statusSincronizacao ?? '-', style: AppTheme.textoGeral),
-                const Icon(Icons.sync, size: 25, color: Colors.grey),
+                const Icon(Icons.upload, size: 25, color: Colors.grey),
               ],
             ),
             const SizedBox(height: 16),

@@ -8,7 +8,6 @@ class DefaultButton extends StatelessWidget {
   final Function()? onPressed;
   final double? width;
   final double? height;
-  final BoxShadow? boxShadow;
 
   const DefaultButton({
     Key? key,
@@ -16,17 +15,15 @@ class DefaultButton extends StatelessWidget {
     required this.onPressed,
     this.width,
     this.height,
-    this.boxShadow,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        constraints: BoxConstraints(minWidth: SizeConfig.widthMultiplier * 40),
+        width: width ?? SizeConfig.widthMultiplier * 40,
         decoration: BoxDecoration(
-          boxShadow: boxShadow != null ? [boxShadow!] : null,
-          gradient: AppTheme.corBotao,
-          borderRadius: BorderRadius.circular(18.0),
+          color: AppTheme.corBotao,
+          borderRadius: BorderRadius.circular(12.0),
         ),
         child: MaterialButton(
           height: SizeConfig.heightMultiplier * 6,
@@ -35,9 +32,22 @@ class DefaultButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(18.0),
           ),
           padding: EdgeInsets.zero,
-          child: Text(
-            textButton!,
-            style: AppTheme.textoGeral,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.upload,
+                color: Colors.black,
+                size: SizeConfig.heightMultiplier * 4,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  textButton!,
+                  style: AppTheme.labelText,
+                ),
+              ),
+            ],
           ),
         ),
       ),
