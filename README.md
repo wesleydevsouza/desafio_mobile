@@ -3,9 +3,7 @@ Este aplicativo Flutter simula o ciclo de transporte de materiais em uma minera�
 
 
 ## ✨ Funcionalidades
--O app exibe em tempo real da etapa atual do ciclo.
-
--Registro automático de etapas do ciclo.
+-O app exibe em tempo real a etapa atual do ciclo.
 
 -Exportação dos dados simulados para um arquivo .jsonl.
 
