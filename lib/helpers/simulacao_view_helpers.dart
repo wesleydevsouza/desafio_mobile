@@ -4,6 +4,7 @@ import '../viewmodels/simulacao_viewmodel.dart';
 mixin SimulacaoViewHelpers<T extends StatefulWidget> on State<T> {
   void onSimularPressed(
       SimulacaoViewModel viewModel, ScrollController scrollController) {
+    viewModel.iniciarSimulacao();
     viewModel.simularProximaLeitura();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (scrollController.hasClients) {

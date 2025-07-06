@@ -15,6 +15,14 @@ class SimulacaoViewModel extends ChangeNotifier {
   String get etapaAtual => _etapaAtual;
   String _etapaAtual = "Aguardando início";
 
+  bool _simulacaoIniciada = false;
+  bool get simulacaoIniciada => _simulacaoIniciada;
+
+  void iniciarSimulacao() {
+    _simulacaoIniciada = true;
+    notifyListeners();
+  }
+
   LeituraSensor? get leituraAtual =>
       _indiceAtual >= 0 && _indiceAtual < _leituras.length
           ? _leituras[_indiceAtual]

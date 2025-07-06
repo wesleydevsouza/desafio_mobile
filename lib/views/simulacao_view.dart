@@ -82,7 +82,8 @@ class _SimulacaoViewState extends State<SimulacaoView>
                     pontoBasculamento:
                         "(${leitura.pontoBasculamento.x}, ${leitura.pontoBasculamento.y})",
                     cicloId: ciclo?.cicloId,
-                    dataInicio: ciclo?.dataInicio,
+                    dataInicio:
+                        viewModel.simulacaoIniciada ? ciclo?.dataInicio : null,
                     dataFim: ciclo?.dataFim,
                     statusSincronizacao: ciclo?.statusSincronizacao,
                     etapas: ciclo?.etapas ?? const [],

@@ -73,44 +73,67 @@ class SimulacaoCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    const Icon(Icons.front_loader,
-                        size: 36, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(equipamentoCarga, style: AppTheme.textoGeral),
-                        SizedBox(
-                          width: SizeConfig.widthMultiplier * 50,
-                          child: Text(
-                            cicloId ?? '-',
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTheme.subTitulo,
-                          ),
+                Flexible(
+                  child: Row(
+                    children: [
+                      const Icon(Icons.front_loader,
+                          size: 36, color: Colors.white),
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                equipamentoCarga,
+                                style: AppTheme.textoGeral,
+                              ),
+                            ),
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                cicloId ?? '-',
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTheme.subTitulo,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  velocidade,
-                  style: AppTheme.textoGeral.copyWith(
-                    color: corVelocidade,
-                    fontWeight: FontWeight.w600,
+                const SizedBox(width: 8),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        velocidade,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTheme.textoGeral.copyWith(
+                          color: corVelocidade,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: SizeConfig.heightMultiplier * 2),
             const Text('Etapa Atual', style: AppTheme.subTitulo),
             Text(etapaAtual, style: AppTheme.textoGeral),
-            const SizedBox(height: 16),
+            SizedBox(height: SizeConfig.heightMultiplier * 2),
             const Text('Ponto de Basculamento', style: AppTheme.subTitulo),
             Text(pontoBasculamento, style: AppTheme.textoGeral),
-            const SizedBox(height: 16),
+            SizedBox(height: SizeConfig.heightMultiplier * 2),
             const Text('Início do Ciclo', style: AppTheme.subTitulo),
             const SizedBox(height: 4),
             Row(
@@ -120,7 +143,7 @@ class SimulacaoCard extends StatelessWidget {
                 const Icon(Icons.calendar_today, size: 20, color: Colors.grey),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: SizeConfig.heightMultiplier * 2),
             const Text('Fim do Ciclo', style: AppTheme.subTitulo),
             const SizedBox(height: 4),
             Row(
@@ -130,7 +153,7 @@ class SimulacaoCard extends StatelessWidget {
                 const Icon(Icons.calendar_today, size: 20, color: Colors.grey),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: SizeConfig.heightMultiplier * 2),
             const Text('Status da Sincronização', style: AppTheme.subTitulo),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +162,7 @@ class SimulacaoCard extends StatelessWidget {
                 const Icon(Icons.upload, size: 25, color: Colors.grey),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: SizeConfig.heightMultiplier * 2),
             ExpansionTile(
               iconColor: Colors.white,
               collapsedIconColor: Colors.white,
